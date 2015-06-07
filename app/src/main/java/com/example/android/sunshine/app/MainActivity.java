@@ -33,14 +33,21 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.v(LOG_TAG, "Log level verbose");
+        Log.d(LOG_TAG, "Log level debug");
+        Log.i(LOG_TAG, "Log level info");
+        Log.w(LOG_TAG, "Log level warning");
+        Log.e(LOG_TAG, "Log level error");
+
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
+            ForecastFragment fragment = new ForecastFragment();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new ForecastFragment())
+                    .add(R.id.container, fragment)
                     .commit();
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -58,8 +65,7 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
-        }
-        if (id == R.id.action_map) {
+        } else if (id == R.id.action_map) {
             openPreferredLocationInMap();
             return true;
         }
